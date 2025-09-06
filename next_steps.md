@@ -3,7 +3,7 @@
 
 **Customer Lifetime Value (CLV):** This measures the total revenue a business can expect from a single customer throughout their entire relationship. By calculating CLV, you can identify your most profitable customers and allocate marketing spend more effectively.
 
-### Data (MOOC) for ccustomer-Focused Analysis
+### Data (MOOC) for Customer-Focused Analysis
 1. For RFM & CLV Analysis
 These fields are crucial for understanding a user's value and loyalty.
 
