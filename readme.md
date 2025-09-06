@@ -68,7 +68,7 @@ ORDER BY
 LIMIT 10;
 ```
 
-### Dasboards
+### Dashboards
 [Looker Studio Dashboard](https://lookerstudio.google.com/u/0/reporting/53db7069-39af-4988-a5bf-e101c8edcce1/page/14AXF/edit)
 
 - Sales Performance
