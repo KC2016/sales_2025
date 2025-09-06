@@ -13,6 +13,13 @@ These fields are crucial for understanding a user's value and loyalty.
 
 `total_revenue`: The total amount of money a user has spent on courses. This is essential for Monetary value and Customer Lifetime Value (CLV).
 
+| Column Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `enrollment_date` | DATE | The date the user enrolled in their first course. |
+| `total_courses_enrolled` | NUMBER | The total number of courses a user has enrolled in. |
+| `total_revenue` | NUMBER | The total amount of money a user has spent on courses. |
+
+
 2. For Behavioral Segmentation
 These columns help you understand how users interact with your content.
 
@@ -21,6 +28,13 @@ These columns help you understand how users interact with your content.
 `video_completion_rate`: The percentage of videos a user completes. You can create this by calculating the percentage of videos watched to the total number of videos in an enrolled course.
 
 `quiz_score_average`: The average score a user achieves on quizzes. This is a strong indicator of user engagement and learning success.
+
+| Column Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `total_time_watched_minutes` | NUMBER | The total video watch time for each user in minutes. |
+| `video_completion_rate` | NUMBER | The percentage of videos a user completes. |
+| `quiz_score_average` | NUMBER | The average score a user achieves on quizzes. |
+
 
 3. For Demographic & Psychographic Segmentation
 These fields help you understand who your users are.
@@ -31,6 +45,11 @@ These fields help you understand who your users are.
 
 `referral_channel`: How the user found your platform (e.g., Organic Search, Social Media, Paid Ad).
 
+| Column Name | Data Type | Description |
+| :--- | :--- | :--- |
+| `user_occupation` | TEXT / VARCHAR | The user's job or field of study. |
+| `user_age_group` | TEXT / VARCHAR | A categorical field for age. |
+| `referral_channel` | TEXT / VARCHAR | How the user found your platform. |
 
 
 ## Product and Performance Analysis
