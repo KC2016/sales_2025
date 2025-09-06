@@ -97,3 +97,7 @@ The sales team should:
 This analysis is based on a dataset sourced from Kaggle. As no currency was specified in the data, all financial figures have been assumed to be in Euros (€).
 
 [Link to PDF](https://github.com/KC2016/sales_2025/blob/main/sales_2025.pdf)
+
+### Next Analysis
+
+- next_steps.md
