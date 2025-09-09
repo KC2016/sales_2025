@@ -103,8 +103,8 @@ This analysis is based on a dataset sourced from Kaggle. As no currency was spec
 ### Working with sales datasets
 In this dataset, Total Revenue was already calculated. However, in real works we need to calculate it and deal with anothwer issues, as:
 -  **subtracting the total spend from the total earning**.
-- consider **only non-refunded orders.**
-- **INNER JOIN tables** to get the customer and the purchase information.
+- considering **only non-refunded orders.**
+- doing **INNER JOIN tables** to get the customer and the purchase information.
 
 ### Next Analysis
 
