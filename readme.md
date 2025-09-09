@@ -98,6 +98,14 @@ This analysis is based on a dataset sourced from Kaggle. As no currency was spec
 
 [Link to PDF](https://github.com/KC2016/sales_2025/blob/main/sales_2025.pdf)
 
+
+
+### Working with sales datasets
+In this dataset, Total Revenue was already calculated. However, in real works we need to calculate it and deal with anothwer issues, as:
+-  **subtracting the total spend from the total earning**.
+- consider **only non-refunded orders.**
+- **INNER JOIN tables** to get the customer and the purchase information.
+
 ### Next Analysis
 
 - next_steps.md
