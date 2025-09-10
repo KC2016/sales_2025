@@ -102,7 +102,7 @@ This analysis is based on a dataset sourced from Kaggle. As no currency was spec
 
 ### Working with sales datasets
 In this dataset, Total Revenue was already calculated. However, in real works we need to calculate it and deal with anothwer issues, as:
--  **subtracting the total spend from the total earning and divinding per the total spend and multiplied per 100.0** ```(total_revenue - total_spend) / total_spend AS ROI```.
+-  **subtracting the total spend from the total revenue and divinding per the total spend** ```(total_revenue - total_spend) / total_spend AS ROI```.
 - considering **only non-refunded orders.**
 - doing **INNER JOIN tables** to get the customer and the purchase information.
 
