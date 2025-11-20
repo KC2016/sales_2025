@@ -1,111 +1,259 @@
+# 📊 Sales Performance, Trends & Recommendations
+### *SQL Analysis + Looker Studio Dashboard*
+Dataset: **Online Sales Dataset – Popular Marketplace Data (Kaggle)**
 
-### Sales Performance, Trends and Recommendations to the Sales Team
+---
 
-dataset: [Online Sales Dataset - Popular Marketplace Data, Kaggle](https://www.kaggle.com/datasets/shreyanshverma27/online-sales-dataset-popular-marketplace-data?resource=download)
+## **1. Project Overview**
+This project analyzes marketplace sales data to understand **revenue trends**, **sales performance**, and **regional purchasing behavior**. The dataset includes transaction records across multiple product categories, regions, payment methods, and dates.
 
-Analysis of the dataset on sales KPIs (total revenue and total units sold) and trends on revenue per month, geographic analysis, and payment methods. Using SQL to answer questions and Looker Studio to visualize the results.
+My objective was to use **SQL (PostgreSQL)** to explore the data and build **interactive dashboards** in **Looker Studio** that summarize KPIs, reveal trends, and guide actionable recommendations for a sales team.
 
+This end-to-end analysis answers key business questions:
 
+- How much total revenue and how many units were sold?
+- Which categories and products drive performance?
+- How do regions differ in sales and payment preferences?
+- What trends appear in monthly revenue and units sold?
+- What insights can support strategic sales decisions?
 
-### SQL queries (PostgreSQL)
+---
+
+## **2. Dataset**
+**Source:** Kaggle – *Online Sales Dataset: Popular Marketplace Data*
+**Rows:** ~ several thousand (varies depending on subset)
+**Content Includes:**
+- Transaction IDs
+- Date
+- Region
+- Product Name & Category
+- Units Sold
+- Total Revenue
+- Payment Method
+
+---
+
+## **3. Technical Approach**
+
+### **3.1 Tools & Technologies**
+- **PostgreSQL** for querying and KPI calculations
+- **Looker Studio** for dynamic dashboards
+- **Google Sheets** / CSV import
+- **GitHub** for version control
+
+---
+
+## **3.2 Setup**
+To reproduce the SQL analysis:
+
+```sql
+-- Load data into PostgreSQL
+CREATE TABLE online_sales_data (...);
+COPY online_sales_data FROM '/path/to/file.csv' CSV HEADER;
+````
+
+---
+
+## **3.3 SQL Queries (KPIs & Visualizations)**
+
+### **Overall KPIs**
+
+```sql
+-- Total Revenue
+SELECT SUM("Total Revenue") AS total_revenue
+FROM online_sales_data;
+
+-- Total Transactions
+SELECT COUNT("Transaction ID") AS total_transactions
+FROM online_sales_data;
+
+-- Average Order Value
+SELECT SUM("Total Revenue") / COUNT(DISTINCT "Transaction ID") AS average_order_value
+FROM online_sales_data;
 ```
--- 1. Scorecards for Overall Performance
--- total revenue
-SELECT SUM("Total Revenue") AS total_revenue FROM online_sales_data;
 
--- total transactions
-SELECT COUNT("Transaction ID") AS total_transactions FROM online_sales_data;
+### **Revenue Trend (Line Chart)**
 
--- avg order value
-SELECT SUM("Total Revenue") / COUNT(DISTINCT "Transaction ID") AS average_order_value FROM online_sales_data;
-
--- 2. Line Chart for Sales Trend
+```sql
 SELECT
   "Date",
   SUM("Total Revenue") AS daily_revenue
-FROM
-  online_sales_data
-GROUP BY
-  "Date"
-ORDER BY
-  "Date";
+FROM online_sales_data
+GROUP BY "Date"
+ORDER BY "Date";
+```
 
--- 3. Bar Charts for Categorical Data
--- Revenue by Product Category:
+### **Revenue by Product Category**
+
+```sql
 SELECT
   "Product Category",
   SUM("Total Revenue") AS total_revenue_by_category
-FROM
-  online_sales_data
-GROUP BY
-  "Product Category"
-ORDER BY
-  total_revenue_by_category DESC;
+FROM online_sales_data
+GROUP BY "Product Category"
+ORDER BY total_revenue_by_category DESC;
+```
 
--- Revenue by Region:
+### **Revenue by Region**
+
+```sql
 SELECT
   "Region",
   SUM("Total Revenue") AS total_revenue_by_region
-FROM
-  online_sales_data
-GROUP BY
-  "Region"
-ORDER BY
-  total_revenue_by_region DESC;
+FROM online_sales_data
+GROUP BY "Region"
+ORDER BY total_revenue_by_region DESC;
+```
 
--- 4. Table for Top Products
--- Top 10 Products by Revenue:
+### **Top 10 Bestselling Products**
+
+```sql
 SELECT
   "Product Name",
   SUM("Units Sold") AS units_sold,
   SUM("Total Revenue") AS total_revenue
-FROM
-  online_sales_data
-GROUP BY
-  "Product Name"
-ORDER BY
-  total_revenue DESC
+FROM online_sales_data
+GROUP BY "Product Name"
+ORDER BY total_revenue DESC
 LIMIT 10;
 ```
 
-### Dashboards
-[Looker Studio Dashboard](https://lookerstudio.google.com/u/0/reporting/53db7069-39af-4988-a5bf-e101c8edcce1/page/14AXF/edit)
+---
 
-- Sales Performance
-- Sales Trends
-- Recommendations to the Sales Team
+## **4. Dashboards**
 
-1. Focus on High-Value Categories
-The sales team should prioritize efforts on Electronics, as it's the highest-grossing category. Investigate the cause of the sharp revenue downturn in February to see if it was due to a market event, supply chain issue, or competitor activity. The volatility in this key category presents both a risk and a significant opportunity for growth.
-2. Leverage Regional Strengths
-Instead of a one-size-fits-all approach, the team should tailor sales strategies to each region's specific product preferences.
-- North America: Focus on promoting the Electronics and Books categories.
-- Europe: Double down on selling Home Appliances and Beauty Products.
-- Asia: Reinforce sales of Sports and Clothing, where the market is already strong.
-3. Optimize the Sales Funnel
-The clear regional preferences for payment methods can be used to improve the conversion rate. The sales team should ensure that:
-- In North American marketing and checkout processes, Credit Card is prominently featured.
-- In Europe, PayPal is a primary and highly visible payment option.
-4. Address Market Divergence
-The analysis showed a decline in Asia and Europe but a slight rebound in North America in August.
-The sales team should:
-- Investigate why North America's trend reversed.
-- Develop targeted strategies to counter the ongoing downturn in Asia and Europe, potentially by running specific promotions or campaigns to re-engage customers in those regions.
+Built in **Looker Studio** (Google Data Studio):
 
+### **📈 Sales Performance Dashboard**
 
-*Notes:*
-This analysis is based on a dataset sourced from Kaggle. As no currency was specified in the data, all financial figures have been assumed to be in Euros (€).
+* Total revenue
+* Total units sold
+* Monthly revenue trend
+* Monthly units sold
+* Top 10 products
+* Payment method distribution
+* Revenue by category
+* Filters: Region, Category, Month
 
-[Link to PDF](https://github.com/KC2016/sales_2025/blob/main/sales_2025.pdf)
+### **📊 Sales Trends Dashboard**
 
+* Revenue over time
+* Revenue by category over time
+* Regional comparisons
+* Monthly transactions by region
+* Payment method preferences
+* Narrative text insights
 
+---
 
-### Working with sales datasets
-In this dataset, Total Revenue was already calculated. However, in real works we need to calculate it and deal with anothwer issues, as:
--  **subtracting the total spend from the total revenue and divinding per the total spend** ```(total_revenue - total_spend) / total_spend AS ROI```.
-- considering **only non-refunded orders.**
-- doing **INNER JOIN tables** to get the customer and the purchase information.
+## **5. Key Insights**
 
-### Next Analysis
+### **High-Value Categories**
 
-- next_steps.md
+* **Electronics** is the top revenue generator (€34.98K).
+* Followed by **Home Appliances** (€18.65K) and **Sports** (€14.33K).
+* The sharp decline in February signals a possible market event or supply chain issue.
+
+### **Regional Strengths**
+
+Each region exhibits distinct purchasing patterns:
+
+| Region            | Strongest Categories             |
+| ----------------- | -------------------------------- |
+| **North America** | Electronics, Books               |
+| **Europe**        | Home Appliances, Beauty Products |
+| **Asia**          | Sports, Clothing                 |
+
+These differences justify **region-specific sales strategies**.
+
+### **Payment Method Behavior**
+
+* **Credit Card** dominates in North America (63.5%).
+* **PayPal** is most used in Europe (€21.27K revenue).
+* Asia shows a more diverse payment mix.
+
+These insights support optimizing **checkout UI per region** to increase conversion.
+
+### **Market Divergence**
+
+* Asia and Europe show a consistent **decline** from Feb–Jul.
+* **North America** rebounds in August, suggesting early signs of recovery.
+  This highlights the need for targeted regional campaigns.
+
+---
+
+## **6. Recommendations to the Sales Team**
+
+### **1. Prioritize High-Value Categories**
+
+* Increase promotions and inventory focus on **Electronics**.
+* Investigate February revenue drop for root causes (competitor activity, supply issue).
+
+### **2. Use Regional Targeting**
+
+* **North America:** emphasize Electronics & Books
+* **Europe:** increase visibility for Home Appliances & Beauty Products
+* **Asia:** strengthen Sports & Clothing offerings
+
+### **3. Optimize the Checkout Funnel**
+
+* Highlight **Credit Card** options in NA
+* Highlight **PayPal** in Europe
+* Maintain flexible options in Asia
+
+### **4. Address Market Downturn**
+
+* Investigate causes behind Asia & Europe decline
+* Launch re-engagement campaigns for these regions
+* Explore regional pricing or limited-time promotions
+
+---
+
+## **7. Learning Notes (Working with Real Sales Data)**
+
+Although this dataset provided “Total Revenue,” real-world scenarios require additional steps:
+
+* Calculating revenue: `price * quantity`
+* Excluding refunded or cancelled orders
+* Joining customer, product, and transaction tables
+* Creating ROI metrics:
+
+```sql
+(total_revenue - total_spend) / total_spend AS ROI
+```
+
+* Cleaning inconsistent category names
+* Dealing with missing timestamps or duplicates
+
+---
+
+## **8. Repository Structure**
+
+```
+├── data/
+│   └── online_sales_data.csv
+├── sql/
+│   └── analysis_queries.sql
+├── dashboards/
+│   ├── sales_performance.pdf
+│   └── sales_trends.pdf
+└── README.md
+```
+
+---
+
+## **9. Next Steps**
+
+* Add a **segmentation-based A/B test framework**
+* Build a **machine learning model** to forecast monthly revenue
+* Create a **dimensional schema** (star model) for analytics
+* Add Python scripts to automate KPI calculation
+
+---
+
+## **10. Notes**
+
+All financial values are assumed to be **in Euros (€)** because the original dataset did not specify currency.
+This project is for educational and portfolio purposes.
+
+```
